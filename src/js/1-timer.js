@@ -14,6 +14,7 @@ const elData = {
 
 let userSelectedDate = null;
 elBtnDataStart.disabled = true;
+elBtnDataStart.style.cursor = 'not-allowed';
 
 flatpickr(elInputDateTime, {
   enableTime: true,
@@ -32,6 +33,7 @@ flatpickr(elInputDateTime, {
       elBtnDataStart.disabled = true;
     } else {
       elBtnDataStart.disabled = false;
+      elBtnDataStart.style.cursor = 'pointer';
     }
   },
 });
@@ -52,6 +54,8 @@ function convertMs(ms) {
 
 elBtnDataStart.addEventListener('click', () => {
   elInputDateTime.disabled = true;
+  elInputDateTime.style.cursor = 'not-allowed';
+  elBtnDataStart.style.cursor = 'not-allowed';
 
   const intervalId = setInterval(() => {
     const currentDate = new Date();
@@ -60,15 +64,18 @@ elBtnDataStart.addEventListener('click', () => {
     const { days, hours, minutes, seconds } = elData;
     const objSubtTime = convertMs(subtTime);
 
+    if (objSubtTime.seconds < 0) {
+      clearInterval(intervalId);
+      elInputDateTime.disabled = false;
+      elBtnDataStart.disabled = true;
+      elInputDateTime.style.cursor = 'pointer';
+      return;
+    }
+
     days.textContent = addZero(objSubtTime.days);
     hours.textContent = addZero(objSubtTime.hours);
     minutes.textContent = addZero(objSubtTime.minutes);
     seconds.textContent = addZero(objSubtTime.seconds);
-
-    if (objSubtTime.seconds === 0) {
-      clearInterval(intervalId);
-      elInputDateTime.disabled = false;
-    }
   }, 1000);
 });
 
