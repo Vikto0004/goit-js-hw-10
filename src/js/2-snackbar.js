@@ -5,33 +5,28 @@ const elForm = document.querySelector('.form');
 
 elForm.addEventListener('submit', event => {
   event.preventDefault();
-  const elInpNumber = event.currentTarget.elements.delay;
-  const elInpState = event.currentTarget.elements.state;
 
   const promise = new Promise((resolve, reject) => {
-    if (elInpState.value === 'fulfilled') resolve(elInpNumber.value);
-    else reject(elInpNumber.value);
-  });
+    const elInpState = event.currentTarget.elements.state;
+    const delay = event.currentTarget.elements.delay.value;
 
-  elInpNumber.value = '';
-  elInpState.forEach(el => (el.checked ? (el.checked = false) : undefined));
+    setTimeout(() => {
+      if (elInpState.value === 'fulfilled') resolve(delay);
+      else reject(delay);
+    }, delay);
+  });
 
   promise
     .then(onSuccess => {
-      setTimeout(() => {
-        iziToast.success({
-          message: `Fulfilled promise in ${onSuccess}ms`,
-          position: 'topRight',
-        });
-        console.log();
-      }, onSuccess);
+      iziToast.success({
+        message: `Fulfilled promise in ${onSuccess}ms`,
+        position: 'topRight',
+      });
     })
     .catch(onError => {
-      setTimeout(() => {
-        iziToast.error({
-          message: `Rejected promise in ${onError}ms`,
-          position: 'topRight',
-        });
-      }, onError);
+      iziToast.error({
+        message: `Rejected promise in ${onError}ms`,
+        position: 'topRight',
+      });
     });
 });
