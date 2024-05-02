@@ -1,0 +1,71 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 75vh;
+}
+
+.form label {
+  font-size: 22px;
+}
+
+.form button {
+  border-radius: 10px;
+  border: none;
+  background-color: #6c5fbc;
+  font-weight: 500;
+  line-height: 125%;
+  text-transform: capitalize;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  margin: 0;
+  font-size: 18px;
+  width: 240px;
+  height: 44px;
+  padding: 10px;
+  transition: all 0.5s ease;
+}
+
+.form button:hover {
+  opacity: 0.9;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+fieldset {
+  border-radius: 10px;
+  background-color: #ededed;
+  padding: 10px 20px 20px;
+  display: flex;
+  gap: 20px;
+}
+
+fieldset label {
+  cursor: pointer;
+}
+
+.form-label-delay {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 285px;
+}
+
+.form-label-delay input {
+  border-radius: 8px;
+  background-color: #ededed;
+  padding: 15px;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: #aaabba;
+  outline: transparent;
+  border: transparent 1.5px solid;
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-label-delay input:focus {
+  border-color: #6c5fbc;
+}
